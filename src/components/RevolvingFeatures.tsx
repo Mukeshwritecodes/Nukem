@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import easySetupImg from '/lovable-uploads/084af83f-5d04-4ea9-a9bd-5184d08c9e8d.png';
-import efficientImg from '/lovable-uploads/614a4938-111b-4e4e-b7fa-718ff67df7f6.png';
-import freeImg from '/lovable-uploads/11fa2dbb-e6f2-4776-85b2-179a66b46d3a.png';
-import secureImg from '/lovable-uploads/6589be81-c4de-4d7f-a6d4-d3073ea4925a.png';
+import React, { useState, useEffect } from "react";
+import easySetupImg from "/lovable-uploads/easy.png";
+import efficientImg from "/lovable-uploads/eff.png";
+import freeImg from "/lovable-uploads/free.png";
+import secureImg from "/lovable-uploads/secure.png";
 
 interface Feature {
   id: string;
@@ -13,42 +13,42 @@ interface Feature {
 
 const features: Feature[] = [
   {
-    id: 'free',
-    title: 'Free',
+    id: "free",
+    title: "Free",
     image: freeImg,
-    alt: 'Free'
+    alt: "Free",
   },
   {
-    id: 'easy-setup',
-    title: 'Easy Set-up',
+    id: "easy-setup",
+    title: "Easy Set-up",
     image: easySetupImg,
-    alt: 'Easy Setup'
+    alt: "Easy Setup",
   },
   {
-    id: 'secure',
-    title: 'Secure',
+    id: "secure",
+    title: "Secure",
     image: secureImg,
-    alt: 'Secure'
+    alt: "Secure",
   },
   {
-    id: 'efficient',
-    title: 'Efficient',
+    id: "efficient",
+    title: "Efficient",
     image: efficientImg,
-    alt: 'Efficient'
-  }
+    alt: "Efficient",
+  },
 ];
 
 // Position definitions for the three visible spots
 const positions = [
-  { 
-    className: 'left-[183px] top-0 max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-0 max-sm:left-[10px] max-sm:top-0' 
+  {
+    className: "left-[183px] top-0 max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-0 max-sm:left-[10px] max-sm:top-0",
   },
-  { 
-    className: 'left-[13px] top-[200px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[120px] max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:top-[80px]' 
+  {
+    className: "left-[13px] top-[200px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[120px] max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:top-[80px]",
   },
-  { 
-    className: 'left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[240px] max-sm:right-[10px] max-sm:left-auto max-sm:top-0 max-sm:translate-x-0' 
-  }
+  {
+    className: "left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[240px] max-sm:right-[10px] max-sm:left-auto max-sm:top-0 max-sm:translate-x-0",
+  },
 ];
 
 export const RevolvingFeatures: React.FC = () => {
@@ -69,7 +69,7 @@ export const RevolvingFeatures: React.FC = () => {
       const featureIndex = (rotation + i) % features.length;
       visible.push({
         ...features[featureIndex],
-        positionIndex: i
+        positionIndex: i,
       });
     }
     return visible;
@@ -82,26 +82,20 @@ export const RevolvingFeatures: React.FC = () => {
       <div className="w-[536px] h-[622px] shrink-0 relative max-md:w-full max-md:h-[400px] max-sm:h-[300px] overflow-hidden">
         {visibleFeatures.map((feature, index) => {
           const position = positions[feature.positionIndex];
-          
+
           return (
             <div
               key={`${feature.id}-${rotation}`}
               className={`flex w-[150px] h-[180px] max-sm:w-[100px] max-sm:h-[120px] flex-col justify-center items-center gap-4 max-sm:gap-2 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}
               style={{
                 transform: `translate3d(0, 0, 0)`,
-                opacity: 1
+                opacity: 1,
               }}
             >
               <div className="w-[135px] h-[118px] flex items-center justify-center">
-                <img
-                  src={feature.image}
-                  alt={feature.alt}
-                  className="w-full h-full object-contain transition-all duration-700 ease-in-out"
-                />
+                <img src={feature.image} alt={feature.alt} className="w-full h-full object-contain transition-all duration-700 ease-in-out" />
               </div>
-              <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px] transition-all duration-700 ease-in-out">
-                {feature.title}
-              </span>
+              <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px] transition-all duration-700 ease-in-out">{feature.title}</span>
             </div>
           );
         })}
