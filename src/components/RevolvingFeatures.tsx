@@ -1,80 +1,108 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import easySetupImg from '/lovable-uploads/084af83f-5d04-4ea9-a9bd-5184d08c9e8d.png';
+import efficientImg from '/lovable-uploads/614a4938-111b-4e4e-b7fa-718ff67df7f6.png';
+import freeImg from '/lovable-uploads/11fa2dbb-e6f2-4776-85b2-179a66b46d3a.png';
+import secureImg from '/lovable-uploads/6589be81-c4de-4d7f-a6d4-d3073ea4925a.png';
+
+interface Feature {
+  id: string;
+  title: string;
+  image: string;
+  alt: string;
+}
+
+const features: Feature[] = [
+  {
+    id: 'free',
+    title: 'Free',
+    image: freeImg,
+    alt: 'Free'
+  },
+  {
+    id: 'easy-setup',
+    title: 'Easy Set-up',
+    image: easySetupImg,
+    alt: 'Easy Setup'
+  },
+  {
+    id: 'secure',
+    title: 'Secure',
+    image: secureImg,
+    alt: 'Secure'
+  },
+  {
+    id: 'efficient',
+    title: 'Efficient',
+    image: efficientImg,
+    alt: 'Efficient'
+  }
+];
 
 export const RevolvingFeatures: React.FC = () => {
+  const [startIndex, setStartIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStartIndex((prev) => (prev + 1) % features.length);
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Get 3 visible features starting from startIndex
+  const getVisibleFeatures = () => {
+    const visible = [];
+    for (let i = 0; i < 3; i++) {
+      const index = (startIndex + i) % features.length;
+      visible.push(features[index]);
+    }
+    return visible;
+  };
+
+  const visibleFeatures = getVisibleFeatures();
+
   return (
     <div className="flex w-[363px] items-center gap-2.5 p-2.5 max-md:w-full">
       <div className="w-[536px] h-[622px] shrink-0 relative max-md:w-full max-md:h-[400px] max-sm:h-[300px]">
-        {/* Secure Icon - Center */}
-        <div className="flex w-[150px] h-[180px] flex-col justify-center items-center gap-4 shrink-0 absolute left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[300px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[200px]">
-          <div className="w-[150px] h-[135px] relative">
-            <svg 
-              width="150" 
-              height="135" 
-              viewBox="0 0 150 135" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full"
-            >
-              <path 
-                d="M68.5148 122.682C55.144 115.236 44.6079 106.219 37.2092 95.8973C31.5398 87.9868 29.7982 82.1154 29.4956 81.0041L29.125 79.6179V26.8902L74.9995 8.69189L120.874 26.8902V79.6351L120.497 81.0213C120.207 82.1154 118.459 87.9868 112.784 95.9145C105.372 106.225 94.8735 115.247 81.4842 122.699L74.9995 126.308L68.5148 122.682Z" 
-                fill="#CFCFCF" 
-                stroke="white" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-              />
-              <path 
-                d="M71.7585 117.67C41.5893 100.869 35.8396 80.4714 35.6111 79.6122L35.4258 78.9191V30.7453L75.0008 15.0502L114.576 30.7453V78.9191L114.391 79.6122C114.162 80.4714 108.406 100.869 78.2432 117.67L75.0008 119.469L71.7585 117.67Z" 
-                fill="white"
-              />
-              <path 
-                d="M75.0006 21.5974L41.7188 34.3368V78.226C41.7188 78.226 46.7274 96.9341 75.0006 112.681C103.274 96.9169 108.276 78.226 108.276 78.226V34.3368L75.0006 21.5974Z" 
-                fill="#024950"
-              />
-              <path 
-                opacity="0.19" 
-                d="M81.4847 122.682C94.8555 115.236 105.385 106.219 112.784 95.8973C118.46 87.9868 120.195 82.1154 120.498 81.0041L120.874 79.6179V26.8902L75 8.69189V126.291L81.4847 122.682Z" 
-                fill="black"
-              />
-            </svg>
-          </div>
-          <span className="text-[#0A8CBF] text-2xl font-bold tracking-[0.96px] max-sm:text-lg max-sm:tracking-[0.72px]">
-            Secure
-          </span>
-        </div>
-
-        {/* Easy Setup - Left */}
-        <div className="flex w-[150px] h-[180px] flex-col justify-center items-center gap-2.5 shrink-0 absolute left-[13px] top-[200px] max-md:left-2.5 max-md:top-[150px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[120px]">
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/481229e5f3bde6695bd6eb82f14c0d76e5ac2688?width=272"
-            alt="Easy Setup"
-            className="w-[136px] h-[142px] shrink-0"
-          />
-          <span className="text-[#0A8CBF] text-2xl font-bold tracking-[0.96px] max-sm:text-lg max-sm:tracking-[0.72px]">
-            Easy Set-up
-          </span>
-        </div>
-
-        {/* Free - Top Center */}
+        {/* Top Center */}
         <div className="flex w-[150px] h-[180px] flex-col items-center gap-4 shrink-0 absolute left-[183px] top-0 max-md:-translate-x-2/4 max-md:left-2/4 max-md:top-0 max-sm:w-[120px] max-sm:h-[140px]">
-          <img
-            src="https://api.builder.io/api/v1/image/assets/TEMP/4433d1e2de0fa0b633ddb1221c71c0e4a21d93b3?width=270"
-            alt="Free"
-            className="w-[135px] h-[118px] shrink-0"
-          />
+          <div className="w-[135px] h-[118px] flex items-center justify-center transition-all duration-500 ease-in-out">
+            <img
+              src={visibleFeatures[0]?.image}
+              alt={visibleFeatures[0]?.alt}
+              className="w-full h-full object-contain"
+            />
+          </div>
           <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px]">
-            Free
+            {visibleFeatures[0]?.title}
           </span>
         </div>
 
-        {/* Efficient - Top Right */}
-        <div className="flex w-[150px] h-[180px] flex-col justify-center items-center gap-4 shrink-0 absolute left-[378px] top-0 max-md:left-auto max-md:right-2.5 max-md:top-0 max-sm:w-[120px] max-sm:h-[140px]">
-          <div className="w-[135px] h-[118px] flex items-center justify-center bg-[#0FA4AF] rounded-full">
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="white"/>
-            </svg>
+        {/* Left */}
+        <div className="flex w-[150px] h-[180px] flex-col justify-center items-center gap-2.5 shrink-0 absolute left-[13px] top-[200px] max-md:left-2.5 max-md:top-[150px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[120px]">
+          <div className="w-[136px] h-[142px] flex items-center justify-center transition-all duration-500 ease-in-out">
+            <img
+              src={visibleFeatures[1]?.image}
+              alt={visibleFeatures[1]?.alt}
+              className="w-full h-full object-contain"
+            />
           </div>
-          <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px]">
-            Efficient
+          <span className="text-[#0A8CBF] text-2xl font-bold tracking-[0.96px] max-sm:text-lg max-sm:tracking-[0.72px]">
+            {visibleFeatures[1]?.title}
+          </span>
+        </div>
+
+        {/* Center Bottom */}
+        <div className="flex w-[150px] h-[180px] flex-col justify-center items-center gap-4 shrink-0 absolute left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[300px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[200px]">
+          <div className="w-[150px] h-[135px] flex items-center justify-center transition-all duration-500 ease-in-out">
+            <img
+              src={visibleFeatures[2]?.image}
+              alt={visibleFeatures[2]?.alt}
+              className="w-full h-full object-contain"
+            />
+          </div>
+          <span className="text-[#0A8CBF] text-2xl font-bold tracking-[0.96px] max-sm:text-lg max-sm:tracking-[0.72px]">
+            {visibleFeatures[2]?.title}
           </span>
         </div>
       </div>
