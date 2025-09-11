@@ -41,18 +41,12 @@ const features: Feature[] = [
 // Position definitions for the three visible spots
 const positions = [
   { 
-    left: '183px', 
-    top: '0px', 
     className: 'left-[183px] top-0 max-md:-translate-x-2/4 max-md:left-2/4 max-md:top-0 max-sm:w-[120px] max-sm:h-[140px]' 
   },
   { 
-    left: '13px', 
-    top: '200px', 
     className: 'left-[13px] top-[200px] max-md:left-2.5 max-md:top-[150px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[120px]' 
   },
   { 
-    left: '183px', 
-    top: '400px', 
     className: 'left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[300px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[200px]' 
   }
 ];
@@ -62,34 +56,36 @@ export const RevolvingFeatures: React.FC = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRotation((prev) => prev + 1);
+      setRotation((prev) => (prev + 1) % features.length);
     }, 3000); // Change every 3 seconds
 
     return () => clearInterval(interval);
   }, []);
 
-  // Get the feature for each position based on rotation
-  const getFeatureForPosition = (positionIndex: number) => {
-    const featureIndex = (rotation + positionIndex) % features.length;
-    return features[featureIndex];
+  // Get 3 visible features starting from the rotation index
+  const getVisibleFeatures = () => {
+    const visible = [];
+    for (let i = 0; i < 3; i++) {
+      const featureIndex = (rotation + i) % features.length;
+      visible.push({
+        ...features[featureIndex],
+        positionIndex: i
+      });
+    }
+    return visible;
   };
+
+  const visibleFeatures = getVisibleFeatures();
 
   return (
     <div className="flex w-[363px] items-center gap-2.5 p-2.5 max-md:w-full">
       <div className="w-[536px] h-[622px] shrink-0 relative max-md:w-full max-md:h-[400px] max-sm:h-[300px] overflow-hidden">
-        {/* Render all features with their animated positions */}
-        {features.map((feature, featureIndex) => {
-          // Calculate which position this feature should be in
-          const positionIndex = (featureIndex - rotation + features.length) % features.length;
-          
-          // Only show features in the first 3 positions
-          if (positionIndex >= 3) return null;
-          
-          const position = positions[positionIndex];
+        {visibleFeatures.map((feature, index) => {
+          const position = positions[feature.positionIndex];
           
           return (
             <div
-              key={feature.id}
+              key={`${feature.id}-${rotation}`}
               className={`flex w-[150px] h-[180px] flex-col justify-center items-center gap-4 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}
               style={{
                 transform: `translate3d(0, 0, 0)`,
