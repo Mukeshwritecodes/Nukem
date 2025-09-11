@@ -41,13 +41,13 @@ const features: Feature[] = [
 // Position definitions for the three visible spots
 const positions = [
   { 
-    className: 'left-[183px] top-0 max-md:-translate-x-2/4 max-md:left-2/4 max-md:top-0 max-sm:w-[120px] max-sm:h-[140px]' 
+    className: 'left-[183px] top-0 max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-0 max-sm:left-[10px] max-sm:top-0' 
   },
   { 
-    className: 'left-[13px] top-[200px] max-md:left-2.5 max-md:top-[150px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[120px]' 
+    className: 'left-[13px] top-[200px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[120px] max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:top-[80px]' 
   },
   { 
-    className: 'left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[300px] max-sm:w-[120px] max-sm:h-[140px] max-sm:top-[200px]' 
+    className: 'left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[240px] max-sm:right-[10px] max-sm:left-auto max-sm:top-0 max-sm:translate-x-0' 
   }
 ];
 
@@ -86,7 +86,7 @@ export const RevolvingFeatures: React.FC = () => {
           return (
             <div
               key={`${feature.id}-${rotation}`}
-              className={`flex w-[150px] h-[180px] flex-col justify-center items-center gap-4 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}
+              className={`flex w-[150px] h-[180px] max-sm:w-[100px] max-sm:h-[120px] flex-col justify-center items-center gap-4 max-sm:gap-2 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}
               style={{
                 transform: `translate3d(0, 0, 0)`,
                 opacity: 1
