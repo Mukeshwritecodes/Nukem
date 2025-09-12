@@ -103,3 +103,21 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .carousel-transform-0 {
+    transform: translateX(0%);
+  }
+
+  .carousel-transform-1 {
+    transform: translateX(-100%);
+  }
+
+  .carousel-transform-2 {
+    transform: translateX(-200%);
+  }
+
+  .carousel-transform-3 {
+    transform: translateX(-300%);
+  }
+}
