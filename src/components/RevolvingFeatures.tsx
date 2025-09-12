@@ -38,16 +38,23 @@ const features: Feature[] = [
   },
 ];
 
-// Position definitions for the three visible spots
+// Position definitions that create a clockwise rotational path
 const positions = [
+  // 0: Top visible position - most prominent
   {
-    className: "left-[183px] top-0 max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-0 max-sm:left-[10px] max-sm:top-0",
+    className: "opacity-100 scale-100 left-[183px] top-0 max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-0 max-sm:left-[10px] max-sm:top-0 max-sm:translate-x-0",
   },
+  // 1: Middle-left visible position - slightly smaller
   {
-    className: "left-[13px] top-[200px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[120px] max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:top-[80px]",
+    className: "opacity-100 scale-90 left-[13px] top-[200px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[120px] max-sm:left-1/2 max-sm:-translate-x-1/2 max-sm:top-[80px]",
   },
+  // 2: Bottom visible position - smallest visible
   {
-    className: "left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[240px] max-sm:right-[10px] max-sm:left-auto max-sm:top-0 max-sm:translate-x-0",
+    className: "opacity-100 scale-80 left-[183px] top-[400px] max-md:left-1/2 max-md:-translate-x-1/2 max-md:top-[240px] max-sm:right-[10px] max-sm:left-auto max-sm:top-0 max-sm:translate-x-0",
+  },
+  // 3: Hidden position on the right, for a smooth circular entry/exit
+  {
+    className: "opacity-0 scale-50 left-[350px] top-[200px] max-md:left-full max-md:top-1/2 max-sm:left-full max-sm:top-1/2",
   },
 ];
 
@@ -62,40 +69,20 @@ export const RevolvingFeatures: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Get 3 visible features starting from the rotation index
-  const getVisibleFeatures = () => {
-    const visible = [];
-    for (let i = 0; i < 3; i++) {
-      const featureIndex = (rotation + i) % features.length;
-      visible.push({
-        ...features[featureIndex],
-        positionIndex: i,
-      });
-    }
-    return visible;
-  };
-
-  const visibleFeatures = getVisibleFeatures();
-
   return (
-    <div className="flex w-[363px] items-center gap-2.5 p-2.5 max-md:w-full">
-      <div className="w-[536px] h-[622px] shrink-0 relative max-md:w-full max-md:h-[400px] max-sm:h-[300px] overflow-hidden">
-        {visibleFeatures.map((feature, index) => {
-          const position = positions[feature.positionIndex];
+    <div className="flex w-[363px] items-center justify-center p-2.5 max-md:w-full">
+      <div className="w-[536px] h-[622px] shrink-0 relative max-md:w-full max-md:h-[400px] max-sm:h-[300px]">
+        {features.map((feature, index) => {
+          // Calculate the feature's position in the clockwise rotation
+          const displayIndex = (index + rotation) % features.length;
+          const position = positions[displayIndex];
 
           return (
-            <div
-              key={`${feature.id}-${rotation}`}
-              className={`flex w-[150px] h-[180px] max-sm:w-[100px] max-sm:h-[120px] flex-col justify-center items-center gap-4 max-sm:gap-2 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}
-              style={{
-                transform: `translate3d(0, 0, 0)`,
-                opacity: 1,
-              }}
-            >
-              <div className="w-[135px] h-[118px] flex items-center justify-center">
-                <img src={feature.image} alt={feature.alt} className="w-full h-full object-contain transition-all duration-700 ease-in-out" />
+            <div key={feature.id} className={`transform flex w-[150px] h-[180px] max-sm:w-[100px] max-sm:h-[120px] flex-col justify-center items-center gap-4 max-sm:gap-2 shrink-0 absolute transition-all duration-700 ease-in-out ${position.className}`}>
+              <div className="w-[135px] h-[118px] max-sm:w-[90px] max-sm:h-[78px] flex items-center justify-center">
+                <img src={feature.image} alt={feature.alt} className="w-full h-full object-contain" />
               </div>
-              <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px] transition-all duration-700 ease-in-out">{feature.title}</span>
+              <span className="text-[#0A8CBF] text-center text-2xl font-bold tracking-[0.96px] w-full max-sm:text-lg max-sm:tracking-[0.72px]">{feature.title}</span>
             </div>
           );
         })}
