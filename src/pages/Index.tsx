@@ -35,7 +35,7 @@ const Index = () => {
           <div className="flex flex-wrap justify-center gap-8 max-xl:gap-7 max-lg:gap-6 max-md:gap-6 max-sm:flex-col max-sm:gap-4">
             <div className="flex flex-col items-center gap-2">
               <h4 className="font-semibold text-[#AFDDE5] max-sm:text-sm">Email</h4>
-              <p className="text-gray-300 max-sm:text-sm">support@securewipe.com</p>
+              <p className="text-gray-300 max-sm:text-sm">support@nukem.com</p>
             </div>
             <div className="flex flex-col items-center gap-2">
               <h4 className="font-semibold text-[#AFDDE5] max-sm:text-sm">Documentation</h4>
@@ -50,7 +50,7 @@ const Index = () => {
           <div className="w-full h-px bg-gray-00 max-w-4xl"></div>
 
           <div className="flex flex-col items-center gap-4 text-sm text-gray-300 max-sm:gap-3 max-sm:text-xs">
-            <p>&copy; 2024 SecureWipe. All rights reserved.</p>
+            <p>&copy; 2024 nukem. All rights reserved.</p>
             <div className="flex gap-6 max-sm:flex-col max-sm:gap-2 max-sm:text-center">
               <span>Privacy Policy</span>
               <span>Terms of Service</span>

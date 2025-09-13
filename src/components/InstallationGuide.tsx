@@ -6,7 +6,7 @@ export const InstallationGuide: React.FC = () => {
     {
       stepNumber: 1,
       title: "Configure Your Wipe Settings",
-      description: "Use the SecureWipe Configurator to select your target operating system (Windows, macOS, or Linux), choose the wipe method (Quick, Standard, or Secure), and configure additional security options. Download the generated configuration file that matches your requirements.",
+      description: "Use the Nukem Configurator to select your target operating system (Windows, macOS, or Linux), choose the wipe method (Quick, Standard, or Secure), and configure additional security options. Download the generated configuration file that matches your requirements.",
       imageSrc: "https://api.builder.io/api/v1/image/assets/TEMP/850257730bea46720f7f13422fba30d025ade8f1?width=1482",
       imageAlt: "Configuration selection interface",
       imageOnLeft: false,
