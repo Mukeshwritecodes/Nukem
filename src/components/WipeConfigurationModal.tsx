@@ -61,7 +61,7 @@ export const WipeConfigurationModal: React.FC<WipeConfigurationModalProps> = ({ 
           {/* Operating System Section */}
           <div>
             <h3 className="text-[#024950] text-2xl font-bold mb-4 max-md:text-xl max-sm:text-lg">Operating System</h3>
-            <div className="flex gap-4 justify-left max-sm:justify-center max-sm:flex-wrap">
+            <div className="flex gap-4 justify-left max-sm:justify-left max-sm:flex-wrap">
               {operatingSystems.map((os) => (
                 <button key={os.id} onClick={() => setSelectedOS(os.id)} className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all w-20 h-20 max-sm:w-16 max-sm:h-16 ${selectedOS === os.id ? "border-[#0FA4AF] bg-[#0FA4AF]/10" : "border-[#024950] hover:border-[#0FA4AF]"}`}>
                   <div className="w-6 h-6 mb-1 max-sm:w-5 max-sm:h-5">
@@ -94,16 +94,16 @@ export const WipeConfigurationModal: React.FC<WipeConfigurationModalProps> = ({ 
               <h3 className="text-[#024950] text-2xl font-bold mb-4 max-md:text-xl max-sm:text-lg">Additional Options</h3>
               <div className="space-y-6 max-sm:space-y-4">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="metadata-purge" className="text-[#0FA4AF] text-lg font-medium max-md:text-base max-sm:text-sm">
+                  <Label htmlFor="metadata-purge" className="text-[#0FA4AF] text-lg font-medium">
                     Metadata Purge
                   </Label>
-                  <Switch id="metadata-purge" checked={metadataPurge} onCheckedChange={setMetadataPurge} className="data-[state=checked]:bg-[#0FA4AF] max-sm:w-8 max-sm:h-4" />
+                  <Switch id="metadata-purge" checked={metadataPurge} onCheckedChange={setMetadataPurge} className="data-[state=checked]:bg-[#0FA4AF]" />
                 </div>
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="stealth-mode" className="text-[#0FA4AF] text-lg font-medium max-md:text-base max-sm:text-sm">
+                  <Label htmlFor="stealth-mode" className="text-[#0FA4AF] text-lg font-medium">
                     Stealth Mode
                   </Label>
-                  <Switch id="stealth-mode" checked={stealthMode} onCheckedChange={setStealthMode} className="data-[state=checked]:bg-[#0FA4AF] max-sm:w-8 max-sm:h-4" />
+                  <Switch id="stealth-mode" checked={stealthMode} onCheckedChange={setStealthMode} className="data-[state=checked]:bg-[#0FA4AF]" />
                 </div>
               </div>
             </div>
