@@ -20,7 +20,7 @@ const Index = () => {
     <div className="flex w-full flex-col items-start min-h-screen bg-white">
       <Hero onGetStarted={handleGetStarted} onCustomizeWipe={handleCustomizeWipe} />
 
-      <main>
+      <main className="w-full">
         <Benefits />
         <InstallationGuide />
       </main>
@@ -47,7 +47,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-00 max-w-4xl"></div>
+          <div className="w-full h-px bg-white/20"></div>
 
           <div className="flex flex-col items-center gap-4 text-sm text-gray-300 max-sm:gap-3 max-sm:text-xs">
             <p>&copy; 2024 nukem. All rights reserved.</p>

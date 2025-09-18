@@ -20,20 +20,27 @@ export const WipeConfigurationModal: React.FC<WipeConfigurationModalProps> = ({ 
   const operatingSystems = [
     { id: "windows", name: "Windows", icon: "/lovable-uploads/Vector.png" },
     { id: "linux", name: "Linux", icon: "/lovable-uploads/Vector-1.png" },
-    { id: "macos", name: "MacOS", icon: "/lovable-uploads/apple.png" },
+    // { id: "macos", name: "MacOS", icon: "/lovable-uploads/apple.png" },
   ];
 
   const wipeTypes = [
     { id: "quick", name: "Quick Wipe" },
     { id: "deep", name: "Deep Wipe" },
-    { id: "ssd-aware", name: "SSD-Aware Wipe" },
-    { id: "standard", name: "Standard Wipe" },
+    // { id: "ssd-aware", name: "SSD-Aware Wipe" },
+    // { id: "standard", name: "Standard Wipe" },
     { id: "secure", name: "Secure Wipe" },
     { id: "multilayered", name: "Multilayered Wipe" },
   ];
 
   const handleDownload = () => {
-    alert("Download would start here with the configured settings!");
+    const filename = "nukem.exe";
+    const url = `/${filename}`;
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
     onClose();
   };
 

@@ -12,6 +12,7 @@ export const Navigation: React.FC<NavigationProps> = ({ onGetStarted, onCustomiz
     <nav className="flex flex-col items-start gap-3 w-full">
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center gap-1">
+          {/* <img src="/lovable-uploads/FaviFinal.png" alt="Nukem" className="w-12 h-12" /> */}
           <h1 className="text-[#003135] text-4xl font-black tracking-[-0.72px] max-sm:text-[24px] max-sm:tracking-[-0.48px]">Nukem</h1>
           <span className="text-[#0FA4AF] text-2xl font-normal max-sm:text-lg">Configurator</span>
         </div>
